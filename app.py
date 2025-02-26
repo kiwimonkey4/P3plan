@@ -24,7 +24,7 @@ def image_converter(img):
 # Create route for URL and ensure route only handles POST request
 @app.route('/', methods = ['POST'])
 
-# Function sends 
+# Function sends labeled image back to client
 def home():
     # Access image file in HTTP request and encode to send over HTTP 
     file = request.files["file"]
