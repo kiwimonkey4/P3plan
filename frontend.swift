@@ -5,7 +5,7 @@ Function takes in binary image data and creates+sends an HTTP request to the bac
 
 // Define all relevant constants 
 let url = URL(string: "http://172.18.103.39:8000") // Backend server URL
-let boundary = "bitchasschimpanzee".data(using: .utf8) // Boundary string converted to binary to separate multipart form data
+let boundary = "chimpanzee".data(using: .utf8) // Boundary string converted to binary to separate multipart form data
 let new_line = "\r\n".data(using: .utf8)
 
 // Create an HTTP request and define that it is a POST request (sends data)
@@ -26,7 +26,7 @@ func sendImage(image: Data) {
   request_body.append(new_line!)
   request_body.append("Content-Type: image/jpeg") // Specifies that image is uploaded as jpeg 
   request_body.append(new_line!)
-  request_body.append(image) // Add image data to request body
+  request_body.append(image) // Add image data to request body 
   request_body.append(new_line!)
   request_body.append(boundary!) // Indicates end of data part 
 
@@ -39,6 +39,7 @@ func sendImage(image: Data) {
 
   */
 
+  /*
   // Create a task to send the request to the server
   let task = URLSession.shared.dataTask(with: http_request) { (data, response, error) in
                                                         
@@ -57,13 +58,14 @@ func sendImage(image: Data) {
 
   // Start the URLSession task
   task.resume()
-  
+  */
+
 }
 
 // Creates URL for image stored on disk 
 let file = URL(fileURLWithPath: "cinnamon.jpg") // Note that fileURLWithPath is the constructor for the URL object and the colon corresponds to the instance variable
 
-// Convert image file into binary format 
+// Convert image file into binary format
 if let file_binary = try?Data(contentsOf: file) {
   print("Image converted to Data: \(file_binary.count) bytes")
   
