@@ -26,6 +26,7 @@ def image_converter(img):
 
 # Function sends labeled image back to client
 def home():
+
     # Access image file in HTTP request and encode to send over HTTP 
     file = request.files["file"]
     converted_image = image_converter(file) # Convert image into format usable to send via HTTP 
