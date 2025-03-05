@@ -26,7 +26,8 @@ def image_converter(img):
 
 # Function sends labeled image back to client
 def home():
-
+    return "Received request!"
+    """
     # Access image file in HTTP request and encode to send over HTTP 
     file = request.files["file"]
     converted_image = image_converter(file) # Convert image into format usable to send via HTTP 
@@ -66,7 +67,8 @@ def home():
     # Extract image's label from the JSON object
     label = response.choices[0].message.content
     return jsonify({"image label":label})
-    
+    """
+
 # Starts the Flask application 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0",port = 8000, debug = True) # Set flask to listen for input on port 8000 and ensure requests can be accepted from any device on a network 
