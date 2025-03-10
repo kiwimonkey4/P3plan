@@ -1,5 +1,5 @@
 import UIKit
-import UIImage
+import Foundation
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -11,7 +11,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
     
     @IBAction func tappedCameraButton(_ sender: Any) {
         
@@ -29,10 +28,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         //Put the image if chose "take image" into the image view seection
         cameraPreview.image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-
+ 
         saveToDirectory(image: cameraPreview.image)
+
         picker.dismiss(animated: true, completion: nil)
-        
         
     }
 
@@ -43,11 +42,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Create an image path so long as image is not nil 
         if let image_jpg = image.jpegData(compressionQuality: 0.5), let image_path = documentDirectoryPath()?.appendingPathComponent("CurrentImage.jpg") {
             
-            //Show image path
+            //Show image path 
             print(image_path)
+
             // Add image to the app's directory 
             try? jpgData.write(to: image_path)
         }
+    }
+
+    func documentDirectoryPath() -> URL? {
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return path.first
     }
 
 }
