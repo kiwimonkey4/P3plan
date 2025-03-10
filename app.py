@@ -63,9 +63,9 @@ def home():
             max_tokens = 15 # Sets a maximum value on length of response 
         )
     
-    # Extract image's label from the JSON object
     label = response.choices[0].message.content
-    return jsonify({"image label":label})
+    return label
+
     
 
 # Starts the Flask application 
