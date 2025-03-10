@@ -37,7 +37,6 @@ func sendImage(file_path: String) {
         request_body.append(newline!)
         http_request.httpBody = request_body
 
-
         // Set up the POST request
         let task = URLSession.shared.dataTask(with: http_request) {(data,response,error) in
 	

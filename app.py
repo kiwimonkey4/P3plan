@@ -26,6 +26,7 @@ def image_converter(img):
 
 # Function sends labeled image back to client
 def home():
+
     # Access image file in HTTP request and encode to send over HTTP 
     file = request.files["file"]
     converted_image = image_converter(file) # Convert image into format usable to send via HTTP 
@@ -69,4 +70,4 @@ def home():
 
 # Starts the Flask application 
 if __name__ == "__main__":
-    app.run(host = "0.0.0.0",port = 8000, debug = True) # Set flask to listen for input on port 8000 and ensure requests can be accepted from any device on a network 
+    app.run(host = "0.0.0.0",port = 8000, debug = True) # Set flask to listen for input on port 8000 and ensure requests can be accepted from any device on a given network
