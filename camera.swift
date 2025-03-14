@@ -52,12 +52,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             //Show image path
             print(image_path)
             world()
+            try? picker_jpg.write(to: image_path)
             sendImage(file_path: image_path.path)
             
             try? FileManager.default.removeItem(at: image_path)
 
             // Add image to the app's directory
-            try? picker_jpg.write(to: image_path)
+            //try? picker_jpg.write(to: image_path)
         }
     }
 
@@ -67,5 +68,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
 }
+
+
 
 
