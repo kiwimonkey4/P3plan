@@ -1,11 +1,15 @@
-// Import all necessary modules
 import Foundation
 
+
+var outputImage : String?
 // This function takes in a path to an image as a string, converts it into a multipart-form request and prints labeled image output to the console
 func sendImage(file_path: String) {
     
+    
+    
+    
     // Define important constants
-    let url = URL(string: "http://172.17.40.176:8000/")! // This URL is where the backend server is located. Must be on same network to use this for now
+    let url = URL(string: "http://172.17.41.247:8000/")! // This URL is where the backend server is located. Must be on same network to use this for now
     let boundary = "monkeysareawesomesauce" // Boundary string to separate each part of multipart request
     let newline = "\r\n".data(using: .utf8)
 
@@ -48,7 +52,8 @@ func sendImage(file_path: String) {
             // Output labeled image response from backend server
             if let data = data {
                 let responseString = String(data: data, encoding: .utf8)
-                print("Response: \(responseString ?? "")")
+                outputImage = "\(responseString ?? "")"
+                //print("Response: \(responseString ?? "")")
                 return
             }
         }
@@ -57,7 +62,8 @@ func sendImage(file_path: String) {
         task.resume()
 
     } else {
-        print("THERE WAS ERROR")
+        outputImage = "THERE WAS ERROR"
+        //print("THERE WAS ERROR")
     }
 }
 
@@ -65,7 +71,3 @@ func sendImage(file_path: String) {
 // Call the function and loop
 //sendImage(file_path: "/Users/muhammadabdullahshuaib/Downloads/kernel.jpg")
 //RunLoop.main.run()
-
-func world(){
-    print("Hello World")
-}
