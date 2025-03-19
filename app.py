@@ -6,11 +6,11 @@ import os
 import dotenv
 import base64
 
-# Instantiate flask object
+# Instantiate 
 app = Flask(__name__) 
 
 # Enable cross-origin resource sharing -> Important for info sharing w/ iPhone frontend
-CORS(app)
+#CORS(app)
 
 # Load sensitive variables from .env file and set up OpenAI client in program
 dotenv.load_dotenv()
@@ -48,7 +48,8 @@ def home():
                     "content": [
                         {
                             "type":"text",
-                            "text": "Give me the label with brand name and no more information than necessary"
+                            #"text": "Give me the label with brand name and no more information than necessary"
+                            "text": "Give me the item im looking at with a brand name and no extra information"
                         },
                         {
                             "type": "image_url",
@@ -65,8 +66,6 @@ def home():
     
     label = response.choices[0].message.content
     return label
-
-    
 
 # Starts the Flask application 
 if __name__ == "__main__":
