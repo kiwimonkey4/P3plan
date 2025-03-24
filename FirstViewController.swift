@@ -16,7 +16,6 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     
-    
     @IBAction func tappedScanButton(_ sender: Any) {
         
         let picker = UIImagePickerController()
@@ -37,14 +36,14 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
         // Create an image path so long as image is not nil 
         if let picker_jpg = image!.jpegData(compressionQuality: 0.5), let image_path = documentDirectoryPath()?.appendingPathComponent("CurrentImage.jpg") {
             
-            //Show image path
+            //Show image path 
             print(image_path)
+
+            // Save image to directory, send HTTP request using image path and delete image from folder
             try? picker_jpg.write(to: image_path)
             sendImage(file_path: image_path.path)
             try? FileManager.default.removeItem(at: image_path)
 
-            // Add image to the app's directory
-            //try? picker_jpg.write(to: image_path)
         }
     }
 
@@ -86,7 +85,4 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
     }
     
-    
-    
 }
-
