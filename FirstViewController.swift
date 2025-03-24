@@ -1,3 +1,4 @@
+// Import necessary libraries
 import UIKit
 import SwiftUI
 import Foundation
@@ -29,20 +30,17 @@ class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return path.first
     }
-    
-    
+
+    // Function takes in a UIImage parameter and saves the image to the application's local directory
     func saveToDirectory (_ image: UIImage?) {
 
-
-        // Create an image path so long as image is not nil
+        // Create an image path so long as image is not nil 
         if let picker_jpg = image!.jpegData(compressionQuality: 0.5), let image_path = documentDirectoryPath()?.appendingPathComponent("CurrentImage.jpg") {
             
             //Show image path
             print(image_path)
             try? picker_jpg.write(to: image_path)
             sendImage(file_path: image_path.path)
-            //sendImage(file_path: "/Users/muhammadabdullahshuaib/Downloads/kernel.jpg")
-            
             try? FileManager.default.removeItem(at: image_path)
 
             // Add image to the app's directory
