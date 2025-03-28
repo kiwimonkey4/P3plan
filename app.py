@@ -1,28 +1,29 @@
 # Import necessary libraries and packages
 import openai 
-from flask import Flask, request, jsonify 
-from flask_cors import CORS
+from flask import Flask, request, jsonify
 import os 
 import dotenv
 import base64
 
-# Instantiate Flask app 
+# Instantiate flask object
 app = Flask(__name__) 
+
 
 # Load sensitive variables from .env file and set up OpenAI client in program
 dotenv.load_dotenv()
 client = openai.OpenAI(api_key = os.getenv("gpt_key"))
 gpt_model = "gpt-4o-mini" # WARNING WARNING WARNING -> DO NOT CHANGE THIS MODEL
 
+# Function takes in image and converts it through binary -> base64 -> utf-8 to be processed by API 
 def image_converter(img):
-    '''Function takes in an image as input and converts it to binary -> base64 and then returns utf-8 for API processing ''
     return base64.b64encode(img.read()).decode("utf-8")
 
 # Create route for URL and ensure route only handles POST request
 @app.route('/', methods = ['POST'])
 
+# Function sends labeled image back to client
 def home():
-    '''This functions sends a labeled image back to the client'''
+
     # Access image file in HTTP request and encode to send over HTTP 
     file = request.files["file"]
     converted_image = image_converter(file) # Convert image into format usable to send via HTTP 
@@ -35,7 +36,7 @@ def home():
                     "role": "system",
                     "content": [
                         {"type": "text",
-                        "text": "Your role is to label images"
+                        "text": "Your role is to label grocery product images"
                         }
                     ],
                 },
@@ -44,8 +45,8 @@ def home():
                     "content": [
                         {
                             "type":"text",
-                            #"text": "Give me the label with brand name and no more information than necessary"
-                            "text": "Give me the item im looking at with a brand name and no extra information"
+                            #"text": "Give me the product with brand name if visible and no more information than necessary"
+                            "text": "Tell me what the product is and say the brand name if it is visible. No more information than this"
                         },
                         {
                             "type": "image_url",
@@ -59,11 +60,12 @@ def home():
             ],
             max_tokens = 15 # Sets a maximum value on length of response 
         )
-
-    # Send the image label to the client
+    
+    # Extract image's label from the JSON object
     label = response.choices[0].message.content
     return label
+    
 
-# Start the Flask application 
+# Starts the Flask application 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0",port = 8000, debug = True) # Set flask to listen for input on port 8000 and ensure requests can be accepted from any device on a given network
