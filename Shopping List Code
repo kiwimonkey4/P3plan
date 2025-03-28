@@ -34,10 +34,6 @@ struct ContentView: View {
         
     }
     
-    func addItem() {
-        print("Add item")
-    }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
