@@ -1,0 +1,47 @@
+import SwiftUI
+import UIKit
+
+struct ContentView: View {
+    
+    @State private var shoppingList: [String] = []
+    @State private var textInput = ""
+    
+    var body: some View {
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundColor(.accentColor)
+            
+            Button("Add item") {
+                shoppingList.append(textInput)
+                print(textInput + " added to list")
+            }.foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+            
+            Button("Remove item") {
+                shoppingList.removeAll(where: { $0 == textInput})
+                print(textInput + " removed from list")
+            }.foregroundColor(.blue)
+            
+            Button("Display Shopping List") {
+                print(shoppingList)
+            }.foregroundColor(.blue)
+            
+            TextField("Item", text: $textInput)
+                .textFieldStyle(.roundedBorder)
+                .padding()
+            
+        }
+        
+    }
+    
+    func addItem() {
+        print("Add item")
+    }
+    
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
