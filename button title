@@ -1,0 +1,29 @@
+override func viewDidLoad() {
+    super.viewDidLoad()
+
+    // Assuming your button is connected as an IBOutlet
+    let spacing: CGFloat = 8.0 // space between image and title
+    let imageSize = yourButton.imageView?.frame.size ?? .zero
+    let titleSize = yourButton.titleLabel?.intrinsicContentSize ?? .zero
+
+    yourButton.titleEdgeInsets = UIEdgeInsets(
+        top: spacing,
+        left: -imageSize.width,
+        bottom: -imageSize.height,
+        right: 0
+    )
+
+    yourButton.imageEdgeInsets = UIEdgeInsets(
+        top: -titleSize.height,
+        left: 0,
+        bottom: 0,
+        right: -titleSize.width
+    )
+
+    yourButton.contentEdgeInsets = UIEdgeInsets(
+        top: titleSize.height,
+        left: 0,
+        bottom: imageSize.height,
+        right: 0
+    )
+}
